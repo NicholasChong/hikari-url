@@ -32,7 +32,7 @@ public class BloomFilterTest {
 
         int wrong = 0;//布隆过滤器错误判断的次数
         int right = 0;//布隆过滤器正确判断的次数
-        for (int i = 0; i < insertions*10; i++) {
+        for (int i = 0; i < 10000; i++) {
             String test = i % 100 == 0 ? lists.get(i / 100) : UUID.randomUUID().toString();//按照一定比例选择bf中肯定存在的字符串
             if (bloomFilter.mightContain(test)) {
                 if (sets.contains(test)) {
@@ -42,8 +42,7 @@ public class BloomFilterTest {
                 }
             }
         }
-
-        System.out.println("=================right=====================" + right);//100
-        System.out.println("=================wrong=====================" + wrong);
+        System.out.println("right:" + right + " / " + "wrong:" + wrong);
+        System.out.println("actual fpp:" + ((double) wrong) / 10000);//100
     }
 }
